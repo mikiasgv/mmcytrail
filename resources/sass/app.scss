@@ -1,0 +1,148 @@
+// Fonts
+ @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// // Variables
+// @import 'variables';
+
+// // Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+/*!
+
+ =========================================================
+ * Material Dashboard - v2.1.0
+ =========================================================
+
+ * Product Page: https://www.creative-tim.com/product/material-dashboard
+ * Copyright 2020 Creative Tim (http://www.creative-tim.com)
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
+
+
+ @import "material-dashboard/variables";
+
+ @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+ @import "~@fortawesome/fontawesome-free/scss/solid.scss";
+ @import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+ @import "material-dashboard/mixins";
+ @import "material-dashboard/core-bootstrap";
+
+// $fa-font-path: "../webfonts";
+
+ // Core Components
+ @import "material-dashboard/buttons";
+ @import "material-dashboard/checkboxes";
+ @import "material-dashboard/radios";
+ @import "material-dashboard/forms";
+ @import "material-dashboard/input-group";
+ @import "material-dashboard/images";
+ @import "material-dashboard/navbar";
+ @import "material-dashboard/alerts";
+ @import "material-dashboard/headers";
+ @import "material-dashboard/type";
+ @import "material-dashboard/tabs";
+ @import "material-dashboard/tooltip";
+ @import "material-dashboard/popover";
+ @import "material-dashboard/dropdown";
+ @import "material-dashboard/togglebutton";
+ @import "material-dashboard/ripples";
+ @import "material-dashboard/footers";
+ @import "material-dashboard/sidebar-and-main-panel";
+ @import "material-dashboard/fixed-plugin";
+ @import "material-dashboard/tables";
+ @import "material-dashboard/misc";
+ @import "material-dashboard/social-buttons";
+
+@import "material-dashboard/cards";
+@import "material-dashboard/cards/card-stats";
+@import "material-dashboard/cards/card-profile";
+@import "material-dashboard/cards/card-plain";
+
+ //plugin scss
+ @import "material-dashboard/plugins/animate";
+ @import "material-dashboard/plugins/chartist";
+ @import "material-dashboard/plugins/perfect-scrollbar";
+
+ @import "material-dashboard/responsive";
+
+ .sidebar::before,
+  .off-canvas-sidebar nav .navbar-collapse::before {
+    background-color: #fff;
+  }
+
+ .text-xs {
+     font-size: 0.6rem;
+ }
+
+ .text-sm {
+    font-size: 1rem;
+}
+
+ .text-md {
+    font-size: 1.2rem;
+}
+
+.text-lg {
+    font-size: 1.4rem;
+}
+
+.text-xl {
+    font-size: 1.6rem;
+}
+
+.text-2x {
+    font-size: 1.8rem;
+}
+
+.text-3x {
+    font-size: 3rem;
+}
+
+.text-4x {
+    font-size: 4rem;
+}
+
+.text-5x {
+    font-size: 6rem;
+}
+
+.mt-n1, .my-n1 {
+    margin-top: -0.25rem !important;
+}
+
+.mt-n2, .my-n2 {
+    margin-top: -0.5rem !important;
+}
+
+.mt-n3, .my-n3 {
+    margin-top: -0.75rem !important;
+}
+
+.mt-n4, .my-n4 {
+    margin-top: -1rem !important;
+}
+
+.mt-n5, .my-n5 {
+    margin-top: -1.25rem !important;
+}
+
+.sidebar .logo a.logo-mini {
+    opacity: 1;
+    float: left;
+    width: 30px;
+    text-align: center;
+    margin-left: 23px;
+    margin-right: 15px;
+}
+
+a.simple-text.logo-normal img {
+    width: 60%;
+}
+.card-profile .card-avatar {
+    max-width: 100px;
+    max-height: 100px;
+}
