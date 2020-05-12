@@ -22,10 +22,6 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/map', function() {
-    return view('map');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

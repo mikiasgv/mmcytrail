@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <single-indicator :stats="userscount"
-                title="Users" icons="user-circle"
+                title="Trailblazers" icons="user-circle"
                 :total="userscount" custom="c-user"
         ></single-indicator>
         <single-indicator :stats="todayspointcount"

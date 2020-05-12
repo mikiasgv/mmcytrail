@@ -9,8 +9,8 @@
             </div>
             <div class="card-body">
                 <div class="d-flex flex-column justify-content-center align-items-center w-100">
-                    <h2 class="mb-0 text-4x font-weight-bold text-primary">{{ stats }}</h2>
-                    <h3 class="mt-n5 text-muted text-uppercase">{{ title }}</h3>
+                    <h2 class="mb-0 text-3x font-weight-bold text-primary">{{ stats }}</h2>
+                    <h3 class="mt-n5 text-lg text-muted text-uppercase font-weight-bolder">{{ title }}</h3>
                 </div>
             </div>
             <div class="card-footer m-0 py-2 px-3">

@@ -21,6 +21,18 @@ class ProgressController extends Controller
                             return Carbon::parse($val->date_on)->format('d');
                         });
 
+        $recordsWeek = Daily::orderBy('date_on')
+                        ->get()
+                        ->groupBy(function ($val) {
+                            return Carbon::parse($val->date_on)->format('W');
+                        });
+
+        $recordsMonth = Daily::orderBy('date_on')
+                        ->get()
+                        ->groupBy(function ($val) {
+                            return Carbon::parse($val->date_on)->format('Y-m');
+                        });
+
         $todayRecord = Daily::whereDay('date_on', Carbon::now()->format('d'))
                             ->get();
 
@@ -30,6 +42,8 @@ class ProgressController extends Controller
         $data['userscount'] = $userCount;
         $data['records'] = $records;
         $data['todayRecord'] = $todayRecord;
+        $data['recordsWeek'] = $recordsWeek;
+        $data['recordsMonth'] = $recordsMonth;
 
         return response()->json(['data' => $data], 200);
 

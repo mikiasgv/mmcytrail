@@ -44932,7 +44932,7 @@ var render = function() {
       _c("single-indicator", {
         attrs: {
           stats: _vm.userscount,
-          title: "Users",
+          title: "Trailblazers",
           icons: "user-circle",
           total: _vm.userscount,
           custom: "c-user"
@@ -45077,13 +45077,18 @@ var render = function() {
           [
             _c(
               "h2",
-              { staticClass: "mb-0 text-4x font-weight-bold text-primary" },
+              { staticClass: "mb-0 text-3x font-weight-bold text-primary" },
               [_vm._v(_vm._s(_vm.stats))]
             ),
             _vm._v(" "),
-            _c("h3", { staticClass: "mt-n5 text-muted text-uppercase" }, [
-              _vm._v(_vm._s(_vm.title))
-            ])
+            _c(
+              "h3",
+              {
+                staticClass:
+                  "mt-n5 text-lg text-muted text-uppercase font-weight-bolder"
+              },
+              [_vm._v(_vm._s(_vm.title))]
+            )
           ]
         )
       ]),
