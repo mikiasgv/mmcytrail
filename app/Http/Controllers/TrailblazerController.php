@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Trainee;
 use App\Record;
 
-class HomeController extends Controller
+class TrailblazerController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,6 +26,6 @@ class HomeController extends Controller
     public function index()
     {
 
-        return redirect('/dashboard');
+        return view('trailblazer');
     }
 }

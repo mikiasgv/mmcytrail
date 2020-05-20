@@ -9,6 +9,7 @@ use App\Record;
 use App\Skill;
 use App\Badge;
 use App\Daily;
+use App\Path;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -39,10 +40,15 @@ class TraineesController extends Controller
 
         $data['trainees'] = DB::table('trainees')->get();
         $data['ranks'] = Rank::all();
+        $data['paths'] = Path::all();
         $data['records'] = DB::table('records')->select('trainee_Id', 'record_Id', 'rank_Id', 'trails', 'time_stamp', DB::raw('MAX(points) as point'))
                                 ->groupBy('record_id','rank_id','trainee_id', 'trails', 'time_stamp')
                                 ->orderBy('point', 'desc')
                                 ->get();
+        $data['latest_records'] = Record::orderBy('trainee_Id', 'asc')
+                                        ->orderBy('time_stamp', 'desc')
+                                        ->get();
+
         $data['skills'] = Skill::all();
         $data['badges'] = DB::table('badges')->get();
         $data['badgerecords'] = $badgerecords;

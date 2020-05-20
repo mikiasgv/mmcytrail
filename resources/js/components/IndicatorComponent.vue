@@ -103,7 +103,7 @@ export default {
 
     data() {
         return {
-            test: this.totalbadgecount
+
         }
     }
 

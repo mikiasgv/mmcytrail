@@ -1,16 +1,16 @@
 <template>
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
         <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
                 <div class="card-icon">
-                <i :class="classes"></i>
+                    <i :class="classes"></i>
                 </div>
                 <h3 class="card-title" :class="custom">Today</h3>
             </div>
             <div class="card-body">
                 <div class="d-flex flex-column justify-content-center align-items-center w-100">
                     <h2 class="mb-0 text-3x font-weight-bold text-primary">{{ stats }}</h2>
-                    <h3 class="mt-n5 text-lg text-muted text-uppercase font-weight-bolder">{{ title }}</h3>
+                    <h3 class="mt-n4 text-lg text-muted text-uppercase font-weight-bolder">{{ title }}</h3>
                 </div>
             </div>
             <div class="card-footer m-0 py-2 px-3">

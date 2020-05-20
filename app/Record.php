@@ -16,7 +16,7 @@ class Record extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
     }
 
-    protected $with = ['skills', 'badges'];
+    //protected $with = ['skills', 'badges'];
 
     public function rank()
     {

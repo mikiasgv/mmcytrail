@@ -84,7 +84,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'name' => env('MAIL_FROM_NAME', 'Trailblazer'),
     ],
 
     /*
@@ -99,7 +99,7 @@ return [
     */
 
     'markdown' => [
-        'theme' => 'default',
+        'theme' => 'mmcytech',
 
         'paths' => [
             resource_path('views/vendor/mail'),

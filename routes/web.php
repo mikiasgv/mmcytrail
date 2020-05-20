@@ -22,11 +22,21 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/trailblazer', 'TrailblazerController@index')->name('trailblazer');
+});
+
+
 //Route::get('/restapis', 'FirstController@index');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+////Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');;
+//Route::get('/trailblazer', 'TrailblazerController@index')->name('trailblazer')->middleware('verified');;
+// Route::get('/dashboard', function () {
+//     return view('welcome');
+// });
 
 
 //API calls

@@ -9,7 +9,11 @@ require('./plugins/perfect-scrollbar.jquery.min');
 require('./core/bootstrap-material-design.min');
 require('./material-dashboard');
 
+
 window.Vue = require('vue');
+
+import VueGoogleCharts from 'vue-google-charts';
+Vue.use(VueGoogleCharts);
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,6 +29,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user-card-component', require('./components/UserCardComponent.vue').default);
 Vue.component('navbar-component', require('./components/NavbarComponent.vue').default);
+Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
 
 Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 
