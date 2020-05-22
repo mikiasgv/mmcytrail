@@ -5,7 +5,7 @@
                                     :data-badge="badge.length">
             <div class="card card-profile">
                 <div class="card-avatar">
-                    <a href="javascript:;">
+                    <a class="btn-link text-dark" target="_blank" :href="getTrailHeadLink(trainee.username)">
                     <img class="img" :src="trainee.photo" />
                     </a>
                 </div>
@@ -15,25 +15,25 @@
                     <h6 class="card-category text-primary text-bold text-xs" v-if="path.length" v-text="path[0].Path"></h6>
 
                     <div class="d-flex justify-content-center my-4 flex-wrap">
-                        <div class="d-flex flex-column mx-2 my-2">
+                        <div class="d-flex flex-column mx-1 my-2">
                             <i class="fas fa-star text-primary text-md"></i>
                             <h5 class="text-sm mt-2">Rank</h5>
-                            <div class="badge badge-success badge-sm p-2" v-text="rank[0].rank"></div>
+                            <div class="badge badge-success badge-sm p-1 text-sm" v-text="rank[0].rank"></div>
                         </div>
-                        <div class="d-flex flex-column mx-2 my-2">
+                        <div class="d-flex flex-column mx-1 my-2">
                             <i class="fas fa-credit-card text-primary text-md"></i>
                             <h5 class="text-sm mt-2">Points</h5>
-                            <div class="badge badge-success badge-sm p-2" v-text="record[0].point"></div>
+                            <div class="badge badge-success badge-sm p-1 text-sm" v-text="returnCommaSeparatedNumber(record[0].point)"></div>
                         </div>
-                        <div class="d-flex flex-column mx-2 my-2">
+                        <div class="d-flex flex-column mx-1 my-2">
                             <i class="fas fa-certificate text-primary text-md"></i>
                             <h5 class="text-sm mt-2">Badges</h5>
-                            <div class="badge badge-success badge-sm p-2"  v-text="badge.length"></div>
+                            <div class="badge badge-success badge-sm p-1 text-sm"  v-text="badge.length"></div>
                         </div>
-                        <div class="d-flex flex-column mx-2 my-2">
+                        <div class="d-flex flex-column mx-1 my-2">
                             <i class="fas fa-puzzle-piece text-primary text-md"></i>
                             <h5 class="text-sm mt-2">Skills</h5>
-                            <div class="badge badge-success badge-sm p-2" v-text="skill.length"></div>
+                            <div class="badge badge-success badge-sm p-1 text-sm" v-text="skill.length"></div>
                         </div>
                     </div>
                     <!-- <p class="card-description" v-if="skill.length">
@@ -42,9 +42,13 @@
                     <p class="card-description" v-else>
                         <span>General</span>
                     </p> -->
-                    <a href="javascript:;" class="btn btn-primary btn-sm btn-round">Learn More</a>
+                    <a  target="_blank" :href="getTrailHeadLink(trainee.username)" class="btn btn-primary btn-sm btn-round">Learn More</a>
                     <div class="w-100 bar learning">
                         <div class="progress" :style="this.animatewidth"></div>
+                    </div>
+                    <div class="flex flex-row w-100">
+                        <i class="fas fa-history text-primary text-sm"></i> Last active
+                        <span class="text-muted ml-2" v-text="ago(record[0].time_stamp)"></span>
                     </div>
                 </div>
             </div>
@@ -55,6 +59,8 @@
 
 <script>
 import gsap from 'gsap';
+import Utilities from '../helpers/utilities.js';
+import moment from 'moment'
 
 export default {
     props: ['trainee', 'paths', 'ranks', 'records', 'skills', 'badges', 'badgerecords', 'skillrecords', 'showGridView'],
@@ -121,15 +127,27 @@ export default {
             }
         },
         animatewidth() {
-            let progressWidth = (((parseInt(this.record[0].point) * 100) / 30000) - 10);
+            let progressWidth = (((parseInt(this.record[0].point) * 100) / 35000) - 10);
 
             if(progressWidth > 0) {
-                return  `width: ${(((parseInt(this.record[0].point) * 100) / 30000) - 10)}%`;
+                return  `width: ${progressWidth}%`;
             }
 
             return  `width: ${1}%`;
         }
 
+    },
+    methods: {
+        returnCommaSeparatedNumber(x) {
+            return Utilities.numberWithCommas(x);
+        },
+
+        ago(datetimeVal) {
+            return moment(datetimeVal, "YYYYMMDD").fromNow();
+        },
+        getTrailHeadLink(username) {
+            return `https://trailblazer.me/id/${username}`;
+        }
     }
 }
 </script>

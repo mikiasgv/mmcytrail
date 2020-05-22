@@ -2,10 +2,23 @@
     <div class="col-md-12 col-lg-12 col-xl-12 col-2xl-6">
         <div class="card card-chart">
             <div class="card-header card-header-warning">
+                <div class="choose-charts">
+                   <div class="d-flex flex-row justify-content-center w-100 bg-white px-2 py-2">
+                       <button class="btn btn-sm btn-dark-500 mx-1" @click="changeChartType('AreaChart')">
+                           <span>Area</span>
+                       </button>
+                       <button class="btn btn-sm btn-dark-500 mx-1" @click="changeChartType('LineChart')">
+                           <span>Line</span>
+                        </button>
+                        <button class="btn btn-sm btn-dark-500 mx-1" @click="changeChartType('BarChart')">
+                           <span>Bar</span>
+                        </button>
+                   </div>
+               </div>
                 <div class="d-flex flex-wrap w-100" v-cloak>
                     <div class="flex-sm-fill w-100 p-h">
                         <GChart class="flex-fill"
-                            type="AreaChart"
+                            :type="chartTypeChoice"
                             :data="pointsData"
                             :options="chartOptions"
                             :resizeDebounce="200"
@@ -13,14 +26,15 @@
                     </div>
                     <div class="flex-sm-fill w-50 p-h">
                         <GChart
-                            type="AreaChart"
+                            :type="chartTypeChoice"
                             :data="badgesData"
                             :options="chartOptions"
                         />
                     </div>
                     <div class="flex-sm-fill w-50 p-h">
                         <GChart
-                            type="AreaChart"
+                            :settings="{ packages: ['corechart'] }"
+                            :type="chartTypeChoice"
                             :data="skillsData"
                             :options="chartOptions"
                         />
@@ -28,31 +42,33 @@
                 </div>
             </div>
             <div class="card-body">
-                <h4 class="card-title ml-2">Weekly Stats</h4>
-                <div class="d-flex flex-row w-100 mb-2">
-                    <button class="btn btn-outline-primary btn-round border-0 btn-sm mr-1">
-                        <span class="text-dark">Total Points:</span>
-                        <span class="ml-2 text-bold text-sm text-success">{{weekTotalPoint}}</span>
-                        <div class="ripple-container"></div>
-                    </button>
-                    <button class="btn btn-outline-primary btn-round border-0 btn-sm mr-1">
-                        <span class="text-dark">Total Badges:</span>
-                        <span class="ml-2 text-bold text-sm text-success">{{weekTotalBadge}}</span>
-                        <div class="ripple-container"></div>
-                    </button>
-                    <button class="btn btn-outline-primary btn-round border-0 btn-sm">
-                        <span class="text-dark">Total Skills:</span>
-                        <span class="ml-2 text-bold text-sm text-success">{{weekTotalSkill}}</span>
-                        <div class="ripple-container"></div>
-                    </button>
-                </div>
+               <div class="total-stat">
+                    <h4 class="card-title ml-2">Weekly Stats</h4>
+                    <div class="d-flex flex-row flex-wrap w-100 mb-2">
+                        <button class="btn btn-outline-primary btn-round border-0 btn-sm mr-1">
+                            <span class="text-dark">Total Points:</span>
+                            <span class="ml-2 text-bold text-sm text-muted">{{returnCommaSeparatedNumber(weekTotalPoint)}}</span>
+                            <div class="ripple-container"></div>
+                        </button>
+                        <button class="btn btn-outline-primary btn-round border-0 btn-sm mr-1">
+                            <span class="text-dark">Total Badges:</span>
+                            <span class="ml-2 text-bold text-sm text-muted">{{returnCommaSeparatedNumber(weekTotalBadge)}}</span>
+                            <div class="ripple-container"></div>
+                        </button>
+                        <button class="btn btn-outline-primary btn-round border-0 btn-sm">
+                            <span class="text-dark">Total Skills:</span>
+                            <span class="ml-2 text-bold text-sm text-muted">{{returnCommaSeparatedNumber(weekTotalSkill)}}</span>
+                            <div class="ripple-container"></div>
+                        </button>
+                    </div>
+               </div>
             </div>
             <div class="card-footer">
                 <div class="stats">
                     <div v-for="(week, index) in generateweeklybutton" :key="index">
-                        <button v-if="index==0" class="btn btn-sm btn-primary" @click="buildChart(week)">This Week</button>
-                        <button v-else-if="index==1" class="btn btn-sm btn-primary" @click="buildChart(week)">Last Week</button>
-                        <button v-else class="btn btn-sm btn-primary" @click="buildChart(week)">{{index}} Weeks Ago</button>
+                        <button v-if="index==0" class="btn btn-sm btn-dark-600" @click="buildChart(week)">This Week</button>
+                        <button v-else-if="index==1" class="btn btn-sm btn-dark-600" @click="buildChart(week)">Last Week</button>
+                        <button v-else class="btn btn-sm btn-dark-600" @click="buildChart(week)">{{index}} Weeks Ago</button>
                     </div>
                 </div>
             </div>
@@ -61,6 +77,8 @@
 </template>
 
 <script>
+import Utilities from '../helpers/utilities.js';
+
 export default {
     props: ['weeklydata'],
     data () {
@@ -76,14 +94,15 @@ export default {
       chartOptions: {
         chart: {
           title: 'Trailhead Performance',
-          subtitle: '',
-          curveType: 'function',
-          legend: {position: 'bottom', maxLines: 3},
-        }
+        },
+        curveType: 'function',
+        legend: {position: 'bottom', maxLines: 3},
       },
       weekTotalPoint: 0,
       weekTotalBadge: 0,
       weekTotalSkill: 0,
+
+      chartTypeChoice: 'AreaChart'
     }
   },
   watch: {
@@ -109,6 +128,10 @@ export default {
   },
 
   methods: {
+      changeChartType(type) {
+          this.chartTypeChoice = type;
+      },
+
       buildChart(week) {
           //console.log(week);
           this.resetChart();
@@ -187,6 +210,10 @@ export default {
         }
 
         return JSON.stringify(obj) === JSON.stringify({});
+      },
+
+      returnCommaSeparatedNumber(x) {
+        return Utilities.numberWithCommas(x);
       }
   }
 }

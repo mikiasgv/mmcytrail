@@ -41,7 +41,9 @@ class TraineesController extends Controller
         $data['trainees'] = DB::table('trainees')->get();
         $data['ranks'] = Rank::all();
         $data['paths'] = Path::all();
-        $data['records'] = DB::table('records')->select('trainee_Id', 'record_Id', 'rank_Id', 'trails', 'time_stamp', DB::raw('MAX(points) as point'))
+        $data['records'] = DB::table('records')->select('trainee_Id', 'record_Id', 'rank_Id', 'trails',
+                                                            'time_stamp',
+                                                            DB::raw('MAX(points) as point'))
                                 ->groupBy('record_id','rank_id','trainee_id', 'trails', 'time_stamp')
                                 ->orderBy('point', 'desc')
                                 ->get();

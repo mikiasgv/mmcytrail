@@ -176,7 +176,8 @@
                                 <th>Learn more</th>
                             </tr>
                         </thead>
-                        <single-user-table-view v-for="trainee in traineesRecords" :key="trainee.trainee_Id"
+                        <tbody class="trainees-table-view">
+                        <single-user-table-view  v-for="trainee in traineesRecords" :key="trainee.trainee_Id"
                             :trainee="trainee"
                             :paths="trails.paths"
                             :ranks="trails.ranks"
@@ -186,6 +187,7 @@
                             :badgerecords="trails.badgerecords"
                             :skillrecords="trails.skillrecords"
                         ></single-user-table-view>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -364,6 +366,8 @@ export default {
             // NProgress.done();
             if(this.showGridView) {
                 this.sortByRank();
+            }else {
+                this.sortTableByRank();
             }
 
         });
@@ -610,8 +614,48 @@ export default {
                 this.showGridView = true;
             }else if(type == "table") {
                 this.showGridView = false;
+                //this.sortTableByRank();
+                //this.animateTable();
             }
-        }
+        },
+        sortTableByRank() {
+            var $wrapperTable = $('.trainees-table-view');
+
+            $wrapperTable.find('.single-table-view').sort(function (b, a) {
+                return +a.dataset.badge - +b.dataset.badge;
+            }).sort(function (b, a) {
+                return +a.dataset.point - +b.dataset.point;
+            }).sort(function (b, a) {
+                return +a.dataset.rank - +b.dataset.rank;
+            }).appendTo( $wrapperTable );
+
+            this.animateTable();
+        },
+        animateTable() {
+            gsap.from('.single-table-view', {
+                duration: 0.5,
+                opacity: 0,
+                scale: 0,
+                x:  -100,
+                ease: 'power1',
+                stagger: {
+                    each: 0.1,
+                    from: 'start'
+                }
+            });
+
+            gsap.to('.single-table-view', {
+                duration: 0.5,
+                opacity: 1,
+                scale: 1,
+                x:  0,
+                ease: 'power1',
+                stagger: {
+                    each: 0.1,
+                    from: 'start'
+                }
+            });
+        },
     }
 }
 </script>

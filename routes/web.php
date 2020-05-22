@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-//Route::get('/restapis', 'FirstController@index');
+Route::get('/restapis', 'FirstController@index');
 ////Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');;
 //Route::get('/trailblazer', 'TrailblazerController@index')->name('trailblazer')->middleware('verified');;
 // Route::get('/dashboard', function () {

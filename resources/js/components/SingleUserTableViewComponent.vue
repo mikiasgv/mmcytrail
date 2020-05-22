@@ -1,6 +1,9 @@
 <template>
-    <tbody>
-        <tr>
+
+        <tr class="single-table-view" :data-rank="rank[0].rank_Id"
+            :data-point="record[0].point"
+            :data-badge="badge.length"
+        >
             <td>
                 <div class="card-avatar">
                     <a href="javascript:;">
@@ -17,7 +20,7 @@
             <th>{{skill.length}}</th>
             <th><button class="btn btn-sm btn-primary">Learn more</button></th>
         </tr>
-    </tbody>
+
 </template>
 
 <script>
@@ -27,31 +30,6 @@ export default {
         return {
 
         }
-    },
-    mounted() {
-        // gsap.from('.single-card', {
-        //     duration: 0.5,
-        //     opacity: 0,
-        //     scale: 0,
-        //     x:  -100,
-        //     ease: 'power1',
-        //     stagger: {
-        //         each: 0.1,
-        //         from: 'start'
-        //     }
-        // });
-
-        // gsap.to('.single-card', {
-        //     duration: 0.5,
-        //     opacity: 1,
-        //     scale: 1,
-        //     x:  0,
-        //     ease: 'power1',
-        //     stagger: {
-        //         each: 0.1,
-        //         from: 'start'
-        //     }
-        // });
     },
 
     computed: {
