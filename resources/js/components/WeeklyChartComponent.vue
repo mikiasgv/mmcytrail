@@ -64,7 +64,7 @@
                </div>
             </div>
             <div class="card-footer">
-                <div class="stats">
+                <div class="stats d-flex flex-row flex-wrap w-100 mb-2">
                     <div v-for="(week, index) in generateweeklybutton" :key="index">
                         <button v-if="index==0" class="btn btn-sm btn-dark-600" @click="buildChart(week)">This Week</button>
                         <button v-else-if="index==1" class="btn btn-sm btn-dark-600" @click="buildChart(week)">Last Week</button>

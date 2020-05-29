@@ -2,45 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Daily;
-use Carbon\Carbon;
 use CventClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Exception\RequestException;
 
 class FirstController extends Controller
 {
     public function index()
     {
-        $recordsWeek = Daily::orderBy('date_on', 'desc')
-                            ->get()
-                            ->groupBy(function ($val) {
-                                return Carbon::parse($val->date_on)->format('W');
-                            })->each(function ($collection, $key) {
-                                            $collection->sortBy('date_on')
-                                            ->groupBy(function ($val) {
-                                                $val->date_on = Carbon::parse($val->date_on)->shortEnglishDayOfWeek;
-                                                return Carbon::parse($val->date_on)->format('d');
-                            });
-                        });
+        $access_token = json_decode($this->getAccessToken(), true);
+
+        //echo($access_token['access_token']);
+
+        $headers = [
+            'Accept' => 'application/json',
+            'x-api-key' => '698q27fv62ulh9a30ken6pi1eb',
+            'Authorization' => 'Bearer ' .$access_token['access_token'],
+
+        ];
+
+        $client = new Client([
+            'headers' => $headers,
+        ]);
+
+        $response = $client->request('GET', 'https://api-platform.cvent.com/ea/events');
+
+        $events = json_decode($response->getBody(), true);
+
+        // $data = [];
+        // $data['paging'] = $events['paging'];
+        // $data['events'] = $events['data'];
+        //dd($events['data']);
+
+        return $events['data'];
+    }
 
 
-        $recordsMonth = Daily::orderBy('date_on', 'desc')
-                                ->get()
-                                ->groupBy(function ($val) {
-                                    // day
-                                    //return Carbon::parse($val->date_on)->format('Y-m-d');
-                                    //month
-                                    //return Carbon::parse($val->date_on)->format('Y-m');
-                                    //week
-                                    return Carbon::parse($val->date_on)->format('W');
-                                });//->groupBy(function ($val) {
-                                //     return Carbon::parse($val->date_on)->format('Y-m-d');
-                                // });
+    protected function getAccessToken()
+    {
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Basic Njk4cTI3ZnY2MnVsaDlhMzBrZW42cGkxZWI6bGtlYmxuNG12MmhoZTQyZjU4am1yZDAyZW00amd1OG5sMjMzOGJuMG01azA4YWw3bWFo',
 
+        ];
 
-        dd(json_decode($recordsMonth));
+        $client = new Client([
+            'headers' => $headers,
+        ]);
 
-        //return view('restclients.index', compact('recordsMonth'));
+        $response = $client->request('POST', 'https://api-platform.cvent.com/auth/v1/oauth2/token', [
+            'form_params' => [
+                'grant_type' => 'client_credentials',
+                'client_id' => '698q27fv62ulh9a30ken6pi1eb',
+            ]
+        ]);
+
+        return $response->getBody();
     }
 }

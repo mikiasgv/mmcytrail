@@ -143,7 +143,15 @@ export default {
         },
 
         ago(datetimeVal) {
-            return moment(datetimeVal, "YYYYMMDD").fromNow();
+            //let dOffset = moment().utcOffset();
+            moment().utcOffset("+03:00");
+            //let newForamt = moment.utc(datetimeVal).format();
+            //console.log(moment.utc(datetimeVal).fromNow());
+            //console.log((moment().format(datetimeVal)).fromNow());
+            //return moment(datetimeVal).fromNow();
+            //return moment.utc(datetimeVal).fromNow();
+            return moment(datetimeVal).utcOffset("+03:00").fromNow();
+            //return moment.utc(datetimeVal).format('LLLL');
         },
         getTrailHeadLink(username) {
             return `https://trailblazer.me/id/${username}`;
@@ -211,5 +219,8 @@ img.leaderboard {
     width: 15%;
     border-radius: 50%;
     border: 2px solid orange;
+}
+.bar.learning {
+    overflow-x: hidden;
 }
 </style>

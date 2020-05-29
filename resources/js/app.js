@@ -33,6 +33,8 @@ Vue.component('sidebar-component', require('./components/SidebarComponent.vue').
 
 Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 
+Vue.component('events-component', require('./components/event/EventsComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

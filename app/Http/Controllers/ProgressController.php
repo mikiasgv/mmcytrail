@@ -40,7 +40,7 @@ class ProgressController extends Controller
                             return Carbon::parse($val->date_on)->format('Y-m');
                         });
 
-        $todayRecord = Daily::whereDay('date_on', Carbon::now()->format('d'))
+        $todayRecord = Daily::whereDay('date_on', Carbon::now('Europe/London')->format('d'))
                             ->get();
 
         $userCount = Trainee::all()->count();
